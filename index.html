@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pour toi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Quicksand:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rose:#F9D9E3; --peche:#FFE8D6; --prune:#4A2545; --baie:#C2456B; --beurre:#FFF3CF;
+    --hand:'Caveat','Segoe Script','Bradley Hand',cursive;
+    --sans:'Quicksand','Nunito','Trebuchet MS',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-snap-type:y proximity}
+  body{
+    font-family:var(--sans);color:var(--prune);
+    background:linear-gradient(180deg,var(--rose) 0%,var(--peche) 50%,var(--beurre) 100%);
+    background-attachment:fixed;overflow-x:hidden;
+  }
+  section{
+    min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:2rem 1.5rem;scroll-snap-align:center;position:relative;z-index:1;
+  }
+  /* Cœur qui bat : le moment mémorable */
+  .coeur{
+    width:96px;height:86px;position:relative;margin-bottom:2.2rem;animation:bat 1.4s ease-in-out infinite;
+  }
+  .coeur::before,.coeur::after{
+    content:"";position:absolute;top:0;width:52px;height:82px;background:var(--baie);
+    border-radius:52px 52px 0 0;
+  }
+  .coeur::before{left:48px;transform:rotate(-45deg);transform-origin:0 100%}
+  .coeur::after{left:0;transform:rotate(45deg);transform-origin:100% 100%}
+  @keyframes bat{0%,100%{transform:scale(1)}15%{transform:scale(1.14)}30%{transform:scale(1)}45%{transform:scale(1.1)}60%{transform:scale(1)}}
+  .ours{font-size:2.6rem;margin-bottom:1.2rem;display:flex;gap:.6rem}
+  .ours span{display:inline-block;animation:salue 2.2s ease-in-out infinite;transform-origin:50% 90%}
+  .ours span:nth-child(2){animation-delay:.3s;font-size:3.2rem}
+  .ours span:nth-child(3){animation-delay:.6s}
+  @keyframes salue{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg) translateY(-6px)}}
+  h1{font-family:var(--hand);font-size:clamp(3rem,13vw,5.2rem);font-weight:700;line-height:1;color:var(--baie)}
+  .sous{margin-top:1rem;font-size:1.05rem;font-weight:600;opacity:.8}
+  .fleche{margin-top:2.5rem;font-size:1.6rem;animation:rebond 1.8s ease-in-out infinite}
+  @keyframes rebond{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+  .msg{font-family:var(--hand);font-size:clamp(1.8rem,7vw,2.9rem);font-weight:500;line-height:1.2;max-width:20em}
+  .msg .mot{display:inline-block;opacity:0;transform:translateY(10px) scale(.9);white-space:pre}
+  .msg.vu .mot{animation:pop .5s cubic-bezier(.3,1.6,.5,1) forwards;animation-delay:calc(var(--i)*.09s)}
+  @keyframes pop{to{opacity:1;transform:none}}
+  .msg.long{font-size:clamp(1.45rem,5.4vw,2.1rem);line-height:1.3;max-width:24em}
+  .msg.long.vu .mot{animation-delay:calc(var(--i)*.045s)}
+  .petit{display:block;margin-top:1.4rem;font-size:1.8rem}
+
+  .fin button{
+    font:600 1.1rem var(--sans);color:#fff;background:var(--baie);border:0;border-radius:999px;
+    padding:.95rem 2rem;cursor:pointer;box-shadow:0 6px 0 #8f2f4d;transition:transform .12s,box-shadow .12s;
+  }
+  .fin button:active{transform:translateY(5px);box-shadow:0 1px 0 #8f2f4d}
+  .fin button:focus-visible{outline:3px solid var(--prune);outline-offset:4px}
+  #dernier{margin-top:2rem;min-height:6rem}
+
+  /* Petits cœurs flottants */
+  .flotte{position:fixed;bottom:-40px;z-index:0;pointer-events:none;opacity:.55;animation:monte linear infinite}
+  @keyframes monte{to{transform:translateY(-115vh) rotate(25deg)}}
+  .jaillit{position:fixed;z-index:5;pointer-events:none;font-size:1.6rem;animation:jaillit 1.6s ease-out forwards}
+  @keyframes jaillit{to{transform:translate(var(--dx),var(--dy)) scale(1.4);opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .msg .mot{opacity:1;transform:none}.flotte{display:none}
+  }
+</style>
+</head>
+<body>
+
+<section>
+  <div class="ours" aria-hidden="true"><span>🧸</span><span>🧸</span><span>🧸</span></div>
+  <div class="coeur" aria-hidden="true"></div>
+  <h1 id="prenom">Pour toi</h1>
+  <p class="sous">Quelques mots que j’avais envie de te dire.</p>
+  <div class="fleche" aria-hidden="true">↓</div>
+</section>
+
+<section><p class="msg">Coucou mon petit cœur, sache que je t’aime d’un amour inconditionnel.<span class="petit">🧸</span></p></section>
+<section><p class="msg">Je t’aime de tout mon être, et ce que je regrette le plus, c’est de t’avoir fait souffrir, alors que tu es ce qu’il y a de plus cher à mes yeux.</p></section>
+<section><p class="msg">Tu mérites que du bonheur et de l’amour.<span class="petit">🧸💗</span></p></section>
+<section><p class="msg">Ton sourire et ton rire sont les plus belles choses de ce monde.<span class="petit">🧸</span></p></section>
+<section><p class="msg">Ce que j’admire chez toi, c’est ta générosité et le fait de toujours vouloir tout donner pour tes proches.</p></section>
+<section><p class="msg">Sache que si tu as envie de parler, ou si tu as envie de quelque chose, je suis là pour toi.</p></section>
+<section><p class="msg">Je veux que tu sois la plus heureuse du monde.<span class="petit">💗</span></p></section>
+<section><p class="msg">Tu as le droit de ressentir ce que tu ressens. Je veux juste te dire de prendre le temps dont tu as besoin : repose-toi bien, fais attention à toi, et continue tous les efforts que tu as faits.</p></section>
+<section><p class="msg">Je suis très fier de la femme que tu es.<span class="petit">🧸</span></p></section>
+<section><p class="msg">#BANNNNGERRRRRRR<span class="petit">🔥🧸🔥</span></p></section>
+<section><p class="msg">Je t’aime Tiffany<span class="petit">🧸💗🧸</span></p></section>
+
+<section><p class="msg long">Prends le temps qu’il te faut pour réfléchir. Moi, je suis là, je t’attends. Je suis totalement dévoué à nous. J’ai pris une énorme claque de la vie et j’en assume l’entière responsabilité. Je me mets à ta place et je sais que c’est très difficile à digérer. Prends bien soin de toi, ne te laisse pas abattre : tu es une femme forte et très courageuse. Je serai toujours à tes côtés, mon bébé d’amour.<span class="petit">🧸</span></p></section>
+
+<section class="fin">
+  <button id="btn" type="button">Un dernier mot 💌</button>
+  <p class="msg" id="dernier"></p>
+</section>
+
+<script>
+  /* ✏️ À PERSONNALISER : son prénom et le dernier mot */
+  const PRENOM = "";   // ex. "Léa" → affichera « Pour toi, Léa »
+  const DERNIER = "Mouffi x Touffi c’est pour la vie et pour l’éternité";
+
+  if (PRENOM) document.getElementById('prenom').textContent = 'Pour toi, ' + PRENOM;
+
+  // Découpe chaque message en mots pour les faire apparaître un par un
+  function decouper(el){
+    const html = el.innerHTML.split(/(<span class="petit">.*?<\/span>)/);
+    let i = 0;
+    el.innerHTML = html.map(part => part.startsWith('<span')
+      ? part
+      : part.split(/(\s+)/).map(m => m.trim() ? `<span class="mot" style="--i:${i++}">${m}</span>` : m).join('')
+    ).join('');
+  }
+  document.querySelectorAll('.msg').forEach(m => { if (m.id !== 'dernier') decouper(m); });
+
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); }
+  }), {threshold:.2});
+  document.querySelectorAll('.msg').forEach(m => obs.observe(m));
+
+  // Cœurs flottants en fond
+  const emojis = ['🧸','💗','🧸','💕','🌸','🧸','💖'];
+  for (let i = 0; i < 14; i++){
+    const s = document.createElement('span');
+    s.className = 'flotte';
+    s.textContent = emojis[i % emojis.length];
+    s.style.left = Math.random()*95 + 'vw';
+    s.style.fontSize = (14 + Math.random()*22) + 'px';
+    s.style.animationDuration = (12 + Math.random()*14) + 's';
+    s.style.animationDelay = (-Math.random()*20) + 's';
+    document.body.appendChild(s);
+  }
+
+  // Bouton final : pluie de cœurs + dernier mot
+  document.getElementById('btn').addEventListener('click', e => {
+    const r = e.target.getBoundingClientRect();
+    for (let i = 0; i < 18; i++){
+      const h = document.createElement('span');
+      h.className = 'jaillit';
+      h.textContent = emojis[i % emojis.length];
+      h.style.left = (r.left + r.width/2) + 'px';
+      h.style.top = (r.top + r.height/2) + 'px';
+      const a = Math.random()*Math.PI*2, d = 90 + Math.random()*140;
+      h.style.setProperty('--dx', Math.cos(a)*d + 'px');
+      h.style.setProperty('--dy', Math.sin(a)*d - 60 + 'px');
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 1700);
+    }
+    const d = document.getElementById('dernier');
+    if (!d.textContent){ d.textContent = DERNIER; decouper(d); requestAnimationFrame(() => d.classList.add('vu')); }
+  });
+</script>
+</body>
+</html>
